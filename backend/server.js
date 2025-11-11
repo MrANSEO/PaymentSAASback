@@ -17,9 +17,16 @@ connectDB();
 app.set('trust proxy', 1);
 
 // Middleware de sécurité
-app.use(securityMiddleware.helmet({contentSecurityPolicy: false,  /* Désactivé la security policy CSP*/}));
+app.use(require("helmet")());
 app.use(securityMiddleware.corsMiddleware);
 app.use(securityMiddleware.limiter);
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+app.get('/', (req, res) => {
+  res.send(`
+    <h2>🚀 API Payment SaaS MeSomb est en ligne</h2>
+    <p>Visitez <a href="/health">/health</a> pour l’état du service.</p>
+  `);
+});
 
 // CORRECTION : Raw body pour le webhook (AVANT le JSON global)
 app.use(
@@ -75,16 +82,16 @@ app.get('/health', (req, res) => {
     mongodb: 'Connecté',
     mesomb: {
       configured: !!(process.env.MESOMB_APP_KEY && process.env.MESOMB_API_KEY && process.env.MESOMB_SECRET_KEY),
-      app_key: process.env.MESOMB_APP_KEY ? '✅ Configuré' : '❌ Manquant',
-      api_key: process.env.MESOMB_API_KEY ? '✅ Configuré' : '❌ Manquant',
-      secret_key: process.env.MESOMB_SECRET_KEY ? '✅ Configuré' : '❌ Manquant'
+      app_key: process.env.MESOMB_APP_KEY ? '  Configuré' : '  Manquant',
+      api_key: process.env.MESOMB_API_KEY ? '  Configuré' : '  Manquant',
+      secret_key: process.env.MESOMB_SECRET_KEY ? '  Configuré' : '  Manquant'
     }
   });
 });
 
-// ✅ AJOUT : Route de test pour vérifier le raw body
+//   AJOUT : Route de test pour vérifier le raw body
 app.post('/test-webhook', express.raw({ type: 'application/json' }), (req, res) => {
-  console.log('📦 Test webhook:');
+  console.log('  Test webhook:');
   console.log('  - Buffer:', req.body);
   console.log('  - String:', req.body.toString());
   console.log('  - Headers:', req.headers);
@@ -94,7 +101,7 @@ app.post('/test-webhook', express.raw({ type: 'application/json' }), (req, res) 
 // Middleware global d'erreurs
 app.use((err, req, res, next) => {
   console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.error('❌ Erreur non gérée:', err.message);
+  console.error('  Erreur non gérée:', err.message);
   console.error('Stack:', err.stack);
   console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   
@@ -111,12 +118,12 @@ app.use((err, req, res, next) => {
 // Démarrage du serveur
 app.listen(PORT, '0.0.0.0', () => {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('🚀 Serveur MeSomb Payment API démarré');
+  console.log('  Serveur MeSomb Payment API démarré');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log(`📡 Port: ${PORT}`);
-  console.log(`🌍 Environnement: ${process.env.NODE_ENV}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/health`);
-  console.log(`📚 Endpoints:`);
+  console.log(`  Port: ${PORT}`);
+  console.log(`  Environnement: ${process.env.NODE_ENV}`);
+  console.log(`  Health check: http://localhost:${PORT}/health`);
+  console.log(`  Endpoints:`);
   console.log(`   - POST /api/v1/auth/register`);
   console.log(`   - POST /api/v1/auth/login`);
   console.log(`   - POST /api/v1/payments/initiate`);
@@ -124,7 +131,7 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`   - POST /api/v1/webhooks/mesomb`);
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   
-  // ✅ Vérification des variables d'environnement au démarrage
+  //   Vérification des variables d'environnement au démarrage
   const missingVars = [];
   if (!process.env.MONGODB_URI) missingVars.push('MONGODB_URI');
   if (!process.env.JWT_SECRET) missingVars.push('JWT_SECRET');
@@ -134,11 +141,11 @@ app.listen(PORT, '0.0.0.0', () => {
   
   if (missingVars.length > 0) {
     console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.error('⚠️  ATTENTION : Variables manquantes dans .env:');
+    console.error('   ATTENTION : Variables manquantes dans .env:');
     missingVars.forEach(v => console.error(`   - ${v}`));
     console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   } else {
-    console.log('✅ Toutes les variables d\'environnement sont configurées');
+    console.log('  Toutes les variables d\'environnement sont configurées');
   }
 });
 
