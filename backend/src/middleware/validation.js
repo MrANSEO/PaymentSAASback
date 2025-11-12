@@ -5,8 +5,8 @@ const { body, validationResult } = require('express-validator');
 const validateInitiatePayment = [
   // ⚠️ TEST: 100 FCFA - REMETTRE 10000 EN PRODUCTION
   body('amount')
-    .isInt({ min: 100 }) // ⚠️ TEST: 100 → 10000 EN PROD
-    .withMessage('Le montant doit être un entier d\'au moins 100 FCFA'), // ⚠️ TEST: 100 → 10000 EN PROD
+    .isInt({ min: 10000 }) // ⚠️ TEST: 100 → 10000 EN PROD
+    .withMessage('Le montant doit être un entier d\'au moins 10000 FCFA'), // ⚠️ TEST: 100 → 10000 EN PROD
 
   // ✅ CORRECTION : Numéro de téléphone camerounais avec ou sans +
   body('customer_phone')

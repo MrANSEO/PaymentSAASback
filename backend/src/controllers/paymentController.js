@@ -20,10 +20,10 @@ class PaymentController {
 
       // ✅ AJOUT: Validation manuelle supplémentaire
       // ⚠️ TEST: 100 FCFA - REMETTRE 10000 EN PRODUCTION
-      if (amount < 100) { // ⚠️ TEST: 100 → 10000 EN PROD
+      if (amount < 10000) { // ⚠️ TEST: 100 → 10000 EN PROD
         return res.status(400).json({
           success: false,
-          message: 'Le montant minimum est de 100 FCFA' // ⚠️ TEST: 100 → 10000 EN PROD
+          message: 'Le montant minimum est de 10000 FCFA' // ⚠️ TEST: 100 → 10000 EN PROD
         });
       }
 

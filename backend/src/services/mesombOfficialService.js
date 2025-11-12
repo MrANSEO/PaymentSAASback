@@ -32,10 +32,10 @@ class MeSombOfficialService {
 
       // ✅ CORRECTION : Validation des paramètres
       // ⚠️ TEST: 100 FCFA - REMETTRE 10000 EN PRODUCTION
-      if (!amount || amount < 100) { // ⚠️ TEST: 100 → 10000 EN PROD
+      if (!amount || amount < 10000) { // ⚠️ TEST: 100 → 10000 EN PROD
         return {
           success: false,
-          error: 'Montant invalide (minimum 100 XAF)' // ⚠️ TEST: 100 → 10000 EN PROD
+          error: 'Montant invalide (minimum 10000 XAF)' // ⚠️ TEST: 100 → 10000 EN PROD
         };
       }
 
