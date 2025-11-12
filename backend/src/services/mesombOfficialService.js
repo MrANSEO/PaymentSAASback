@@ -31,7 +31,7 @@ class MeSombOfficialService {
       console.log('📱 Opérateur reçu:', operator);
 
       // ✅ CORRECTION : Validation des paramètres
-      if (!amount || amount < 10000) {
+      if (!amount || amount < 100) {
         return {
           success: false,
           error: 'Montant invalide (minimum 10000 XAF)'

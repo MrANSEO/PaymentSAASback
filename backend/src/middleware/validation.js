@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 const validateInitiatePayment = [
   // Montant : entier ≥ 10000 FCFA (minimum MeSomb)
   body('amount')
-    .isInt({ min: 10000 })
+    .isInt({ min: 100 })
     .withMessage('Le montant doit être un entier d\'au moins 10000 FCFA'),
 
   // ✅ CORRECTION : Numéro de téléphone camerounais avec ou sans +
