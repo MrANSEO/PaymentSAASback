@@ -17,7 +17,7 @@ connectDB();
 app.set('trust proxy', 1);
 
 // Middleware de sécurité
-app.use(require("helmet")());
+app.use(securityMiddleware.helmet());
 app.use(securityMiddleware.corsMiddleware);
 app.use(securityMiddleware.limiter);
 app.get('/favicon.ico', (req, res) => res.status(204).end());
