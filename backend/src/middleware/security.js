@@ -9,7 +9,11 @@ origin: process.env.FRONTEND_URL || [
     'http://localhost:3000',
     'http://localhost:3001', // ← AJOUTE CETTE LIGNE
     'http://127.0.0.1:3001',
-    'http://localhost:3002', // si tu veux prévoir
+    'http://localhost:3002',
+    'https://frontendpay.onrender.com',
+      process.env.FRONTEND_URL,
+
+     // si tu veux prévoir
     // Ajoute ton URL de prod plus tard
   ],
   credentials: true, // important pour les cookies / auth
