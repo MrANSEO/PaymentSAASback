@@ -31,10 +31,11 @@ class MeSombOfficialService {
       console.log('📱 Opérateur reçu:', operator);
 
       // ✅ CORRECTION : Validation des paramètres
-      if (!amount || amount < 100) {
+      // ⚠️ TEST: 100 FCFA - REMETTRE 10000 EN PRODUCTION
+      if (!amount || amount < 100) { // ⚠️ TEST: 100 → 10000 EN PROD
         return {
           success: false,
-          error: 'Montant invalide (minimum 10000 XAF)'
+          error: 'Montant invalide (minimum 100 XAF)' // ⚠️ TEST: 100 → 10000 EN PROD
         };
       }
 
@@ -93,7 +94,6 @@ class MeSombOfficialService {
             data: {
               transactionId: response.transaction?.pk,
               message: 'Paiement initié avec succès',
-              // ⚠️ Ne PAS renvoyer le statut ici, il viendra du webhook
             }
           };
         } else {

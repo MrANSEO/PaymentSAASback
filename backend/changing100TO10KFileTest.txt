@@ -1,0 +1,7 @@
+    validation.js : min: 100 → min: 10000
+
+    paymentController.js : amount < 100 → amount < 10000
+
+    mesombOfficialService.js : amount < 100 → amount < 10000
+
+    PaymentPage.jsx : const amount = 100 → const amount = 10000

@@ -3,10 +3,10 @@ const { body, validationResult } = require('express-validator');
 
 // ✅ CORRECTION : Validation pour /payments/initiate
 const validateInitiatePayment = [
-  // Montant : entier ≥ 10000 FCFA (minimum MeSomb)
+  // ⚠️ TEST: 100 FCFA - REMETTRE 10000 EN PRODUCTION
   body('amount')
-    .isInt({ min: 100 })
-    .withMessage('Le montant doit être un entier d\'au moins 10000 FCFA'),
+    .isInt({ min: 100 }) // ⚠️ TEST: 100 → 10000 EN PROD
+    .withMessage('Le montant doit être un entier d\'au moins 100 FCFA'), // ⚠️ TEST: 100 → 10000 EN PROD
 
   // ✅ CORRECTION : Numéro de téléphone camerounais avec ou sans +
   body('customer_phone')
