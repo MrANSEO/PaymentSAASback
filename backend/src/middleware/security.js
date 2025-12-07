@@ -7,6 +7,7 @@ const cors = require('cors');
 const corsOptions = {
   origin: [
     'https://frontendpay.onrender.com', // ✅ SANS SLASH
+    'https://paymentsaafront.onrender.com'
     'http://localhost:3000',
     'http://localhost:3001',
     'http://127.0.0.1:3001',
